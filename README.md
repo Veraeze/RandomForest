@@ -41,3 +41,77 @@ The theory was illustrated using the **Iris Flower Dataset**, which includes:
 The goal is to classify the species of an iris flower based on its physical attributes.
 
 
+
+
+
+#  Iris Flower Classification using Random Forest
+
+This project uses the Random Forest Classifier to predict the species of iris flowers based on petal and sepal dimensions.
+
+
+##  Dataset Overview
+- **Dataset**: Iris Dataset (from `sklearn.datasets`)
+- **Features**:
+  - Sepal length (cm)
+  - Sepal width (cm)
+  - Petal length (cm)
+  - Petal width (cm)
+- **Target**: Species (Setosa, Versicolor, Virginica)
+
+
+##  Steps Taken
+
+### 1.  Import Libraries
+Standard data science libraries were imported: `NumPy`, `Pandas`, `Seaborn`, `Matplotlib`, and `scikit-learn`.
+
+### 2.  Data Loading & Inspection
+- Loaded the iris dataset from `sklearn.datasets`.
+- Created a DataFrame using the features.
+- Inspected the structure, basic statistics, and shape of the data.
+
+### 3. ️ Added Target Labels
+- Mapped numeric target values to categorical species names (Setosa, Versicolor, Virginica).
+
+### 4.  Data Splitting
+- Used a custom method to split data into training and testing sets (75% training, 25% testing) using `np.random.uniform`.
+
+### 5.  Target Preparation
+- Used `pd.factorize()` to convert species names in training data to numerical format.
+
+### 6.  Model Building
+- Created and trained a **RandomForestClassifier** with:
+  - `n_jobs=2`
+  - `random_state=0`
+
+### 7.  Model Prediction
+- Predicted species for test samples.
+- Displayed predicted class names and class probabilities.
+- Compared predicted species with actual values.
+
+### 8.  Evaluation
+- **Confusion Matrix**:
+  
+  | Actual \ Predicted | Setosa | Versicolor | Virginica |
+  |--------------------|--------|------------|-----------|
+  | Setosa             |   13   |     0      |     0     |
+  | Versicolor         |   0    |     5      |     2     |
+  | Virginica          |   0    |     0      |    12     |
+
+- **Accuracy**: `93.75%`
+- **Classification Report**:
+  - Setosa: Precision: 1.00, Recall: 1.00
+  - Versicolor: Precision: 1.00, Recall: 0.71
+  - Virginica: Precision: 0.86, Recall: 1.00
+  - Macro avg F1-score: 0.92
+
+
+##  Insights
+- The model performed **perfectly** for Setosa and Virginica.
+- Most errors occurred in predicting Versicolor.
+- Random Forest proved to be a powerful classifier for this multi-class problem with strong generalization.
+
+
+##  Conclusion
+This project shows the power of Random Forest for multi-class classification tasks, especially in biologically meaningful datasets like the Iris flower dataset.
+
+
