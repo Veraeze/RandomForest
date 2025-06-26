@@ -115,3 +115,99 @@ Standard data science libraries were imported: `NumPy`, `Pandas`, `Seaborn`, `Ma
 This project shows the power of Random Forest for multi-class classification tasks, especially in biologically meaningful datasets like the Iris flower dataset.
 
 
+
+
+
+
+
+# Bank Customer Churn Prediction
+
+This project uses the Random Forest Classifier to predict customer churn in a bank dataset. The aim is to identify customers likely to leave the bank (churn) based on features like age, balance, credit score, and other customer attributes.
+
+##  Dataset Overview
+
+- **Rows:** 10,000
+- **Target Variable:** `churn` (0 = No churn, 1 = Churn)
+- **Features Include:**
+  - Numerical: credit_score, age, balance, estimated_salary, etc.
+  - Categorical: country, gender
+  - Binary: credit_card, active_member
+
+##  Objective
+
+To build a machine learning model that:
+- Accurately predicts customer churn
+- Improves recall on the churn class (class 1) due to class imbalance
+- Provides insights into which features most influence churn
+
+##  Technologies Used
+
+- Python, Jupyter Notebook
+- pandas, numpy, seaborn, matplotlib
+- scikit-learn
+
+##  Workflow Summary
+
+### 1. Data Loading and Exploration
+- Imported the dataset using `pandas`
+- Displayed data shape, structure, and statistical summary
+- Visualized class distribution using `countplot`
+
+### 2. Handling Class Imbalance
+- Observed class imbalance from visual inspection (churn: ~20%, no churn: ~80%)
+- Strategy to improve recall included:
+  - Tuning classification threshold
+  - Monitoring confusion matrix metrics
+
+### 3. Preprocessing
+- Encoded categorical variables using `ColumnTransformer`:
+  - OneHotEncoder for `country`
+  - OrdinalEncoder for `gender`
+- Split dataset using `train_test_split`
+
+### 4. Exploratory Visualizations
+- Correlation heatmap on encoded features
+- Boxplots:
+  - `age` vs `churn` (showed distinct distribution patterns)
+  - `active_member` vs `churn`
+- Pie charts:
+  - Distribution of churn across `gender`
+  - Distribution of churn by `country`
+
+### 5. Model Building
+- Built pipeline with:
+  - Preprocessing (`ColumnTransformer`)
+  - Random Forest Classifier (`RandomForestClassifier`)
+- Trained model on training set and evaluated on test set
+
+### 6. Evaluation
+- **Initial Accuracy:** ~86.3%
+- **Confusion Matrix:**
+[[1523   72]
+[ 202  203]]
+- **Recall on churn class (1):** 0.50
+
+### 7. Recall Improvement Experiment
+- Tuned the prediction threshold from default 0.5 to a lower value to boost recall
+- Best results observed:
+- **Accuracy:** 82.6%
+- **Recall (churn class):** 0.69
+- **Precision (churn class):** 0.56
+
+### 8. Postmodel Visualizations
+- Feature importance bar plot (most important: `age`, `balance`, `credit_score`)
+- Confusion matrix heatmap (before and after threshold tuning)
+
+
+##  Conclusion
+
+- **Random Forest** delivered strong overall accuracy and interpretability.
+- **Threshold tuning** significantly improved recall, essential for identifying churned customers.
+- Feature analysis revealed `age`, `active_member`, and `balance` as critical indicators.
+
+
+
+
+
+
+
