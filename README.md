@@ -211,3 +211,83 @@ To build a machine learning model that:
 
 
 
+#  Loan Default Prediction 
+
+This project focuses on predicting whether a customer will default on a loan using the Random Forest Classifier. The dataset is highly imbalanced, and various techniques were applied to improve recall on the minority class (defaults).
+
+
+##  Dataset Overview
+
+- **Total rows**: 255,347  
+- **Target column**: `Default` (0 = No Default, 1 = Default)  
+- **Problem type**: Binary Classification  
+- **Class Imbalance**:  
+  - No Default (0): ~230,000  
+  - Default (1): ~25,000
+
+
+##  Data Preparation
+
+- Loaded data and checked for duplicates  
+- Visualized distribution of target and features  
+- Split data into training and test sets  
+- Categorical features separated into:
+  - **OneHotEncoded**: `Employment`, `MaritalStatus`, `LoanPurpose`, `HasCoSigner`
+  - **OrdinalEncoded**: `HasMortgage`, `HasDependents`, `Education`
+
+
+##  Exploratory Data Analysis
+
+- Countplots and boxplots for all major features by target class  
+- Violin plot for credit score density  
+- Pie charts for `LoanPurpose` and `EmploymentType`  
+- Heatmap of numeric feature correlations  
+- Insights confirmed class imbalance and feature influence on defaults
+
+
+## ️ Modeling Steps
+
+1. **Random Forest Classifier**  
+   - Pipeline built using `ColumnTransformer` and `RandomForestClassifier`  
+   - Initial model showed very high accuracy but poor recall on defaults
+
+2. **SMOTE (Synthetic Minority Over-sampling Technique)**  
+   - Applied to balance classes before training  
+   - Recall improved slightly but remained low due to extreme imbalance
+
+3. **Hyperparameter Tuning**  
+   - Tried different combinations (n_estimators, max_depth, etc.)  
+   - Recall for class 1 remained minimal
+
+4. **Threshold Tuning**  
+   - Predicted probabilities from model  
+   - Evaluated multiple thresholds:
+     - **Threshold = 0.25 chosen**  
+       - Precision (class 1): 0.36  
+       - Recall (class 1): 0.27  
+       - Balanced trade-off
+
+
+##  Final Results at Threshold 0.25
+
+- **Accuracy**: 86%  
+- **Confusion Matrix**:
+[[63364  4309]
+[ 6492  2440]]
+- **Recall (Class 1)**: 0.27  
+- **Precision (Class 1)**: 0.36  
+- **F1-score (Class 1)**: 0.31  
+- **ROC Curve**: Plotted to visualize probability threshold effects
+
+
+## Conclusion
+
+- Imbalanced datasets require more than just accuracy for evaluation  
+- SMOTE and threshold tuning are powerful for improving minority class performance  
+- Even small recall improvements can be meaningful in real-world financial risk prediction
+
+
+
+
+
+
